@@ -1,0 +1,364 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Learn Tani - Community Hub</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Roboto', sans-serif;
+        }
+
+        body {
+            background: #f5f5f5;
+            transition: background 0.3s ease;
+        }
+
+        .navbar {
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            background: linear-gradient(135deg, #6666ff, #4444cc);
+            padding: 1rem;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            color: white;
+            font-size: 1.5rem;
+            font-weight: bold;
+            transition: transform 0.3s ease;
+        }
+
+        .logo:hover {
+            transform: scale(1.1);
+        }
+
+        .nav-links ul {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+        }
+
+        .nav-links a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s ease;
+        }
+
+        .nav-links a:hover {
+            color: #ffa500;
+        }
+
+        .community-header {
+            background: linear-gradient(135deg, #4444cc, #222299);
+            color: white;
+            padding: 4rem 2rem;
+            text-align: center;
+        }
+
+        .community-header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .community-header p {
+            font-size: 1.2rem;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .community-section {
+            background: white;
+            padding: 4rem 2rem;
+            max-width: 1200px;
+            margin: 2rem auto;
+            border-radius: 15px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+        }
+
+        .feature-card {
+            background: #f8f8f8;
+            padding: 2rem;
+            border-radius: 15px;
+            margin: 1rem 0;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            transition: transform 0.3s ease;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .feature-card i {
+            font-size: 2rem;
+            color: #6666ff;
+            margin-bottom: 1rem;
+        }
+
+        .discussion-board {
+            max-width: 1200px;
+            margin: 2rem auto;
+            padding: 2rem;
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+        }
+
+        .discussion-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 2rem;
+        }
+
+        .search-bar {
+            padding: 0.8rem;
+            border: 2px solid #ddd;
+            border-radius: 20px;
+            width: 300px;
+            font-size: 1rem;
+        }
+
+        .create-post-btn {
+            background: #6666ff;
+            color: white;
+            border: none;
+            padding: 0.8rem 1.5rem;
+            border-radius: 20px;
+            cursor: pointer;
+            transition: background 0.3s ease;
+        }
+
+        .create-post-btn:hover {
+            background: #4444cc;
+        }
+
+        .empty-state {
+            text-align: center;
+            padding: 3rem 1rem;
+            color: #666;
+        }
+
+        .empty-state i {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            color: #ddd;
+        }
+
+        .empty-state h3 {
+            margin-bottom: 1rem;
+            font-size: 1.5rem;
+        }
+
+        .empty-state p {
+            font-size: 1.1rem;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        footer {
+            background: linear-gradient(135deg, #6666ff, #4444cc);
+            color: white;
+            padding: 2rem;
+            margin-top: 4rem;
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+        }
+
+        .footer-section {
+            flex: 1;
+            min-width: 200px;
+            margin-bottom: 1rem;
+        }
+
+        .footer-section h3 {
+            margin-bottom: 1rem;
+            font-size: 1.2rem;
+        }
+
+        .footer-section ul {
+            list-style: none;
+        }
+
+        .footer-section ul li {
+            margin-bottom: 0.5rem;
+        }
+
+        .footer-section a {
+            color: #ffa500;
+            text-decoration: none;
+        }
+
+        .footer-section a:hover {
+            text-decoration: underline;
+        }
+
+        .copyright {
+            text-align: center;
+            margin-top: 2rem;
+            padding-top: 1rem;
+            border-top: 1px solid rgba(255,255,255,0.2);
+        }
+
+        @media (max-width: 768px) {
+            .nav-links ul {
+                gap: 1rem;
+                font-size: 0.9rem;
+            }
+
+            .community-header h1 {
+                font-size: 2rem;
+            }
+
+            .discussion-header {
+                flex-direction: column;
+                gap: 1rem;
+            }
+
+            .search-bar {
+                width: 100%;
+            }
+
+            .footer-content {
+                flex-direction: column;
+            }
+
+            .footer-section {
+                width: 100%;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .navbar {
+                padding: 0.5rem;
+            }
+
+            .community-header {
+                padding: 2rem 1rem;
+            }
+
+            .thread-header {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            .user-avatar {
+                margin-right: 0;
+                margin-bottom: 0.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="logo">Learn Tani</div>
+            <div class="nav-links">
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="#lessons.html">Lessons</a></li>
+                    <li><a href="#features.html">Features</a></li>
+                    <li><a href="community.html">Community</a></li>
+                    <li><a href="profile.html">Profile</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <header class="community-header">
+        <h1>Join Our Tani Language Community</h1>
+        <p>Connect with fellow learners, practice your skills, and discover new resources together</p>
+    </header>
+
+    <section class="community-section">
+        <h2>Discussion Forums</h2>
+        
+        <div class="discussion-header">
+            <input type="text" class="search-bar" placeholder="Search discussions...">
+            <button class="create-post-btn">Create New Post</button>
+        </div>
+        
+        <div class="empty-state">
+            <i class="fas fa-comments"></i>
+            <h3>No Recent Discussions</h3>
+            <p>Be the first to start a conversation! Click the "Create New Post" button above to start a new discussion.</p>
+        </div>
+    </section>
+
+    <section class="community-section">
+        <h2>Language Exchange Opportunities</h2>
+        
+        <div class="empty-state">
+            <i class="fas fa-exchange-alt"></i>
+            <h3>No Current Language Exchanges</h3>
+            <p>Check back soon for new language exchange opportunities or create your own post to find a partner.</p>
+        </div>
+    </section>
+
+    <section class="community-section">
+        <h2>Upcoming Community Events</h2>
+        
+        <div class="empty-state">
+            <i class="fas fa-calendar-alt"></i>
+            <h3>No Upcoming Events</h3>
+            <p>Stay tuned for upcoming community events! In the meantime, you can suggest event ideas in the discussion forums.</p>
+        </div>
+    </section>
+
+    <section class="community-section">
+        <h2>Community Members</h2>
+        
+        <div class="empty-state">
+            <i class="fas fa-users"></i>
+            <h3>No Members to Display</h3>
+            <p>Complete your profile to appear in the member directory and connect with other learners.</p>
+        </div>
+    </section>
+
+    <footer>
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>Learn Tani</h3>
+                <p>Master Tani languages with immersive learning experiences</p>
+            </div>
+        </div>
+        
+        <div class="copyright">
+            <p>© 2025 Learn Tani. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Create post button functionality
+            const createPostBtn = document.querySelector('.create-post-btn');
+            if (createPostBtn) {
+                createPostBtn.addEventListener('click', function() {
+                    alert('Post creation feature would open here');
+                });
+            }
+        });
+    </script>
+</body>
+</html>
