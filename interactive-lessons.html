@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Learn Tani - No Content Available</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Roboto', sans-serif;
+        }
+
+        body {
+            background: #f5f5f5;
+            transition: background 0.3s ease;
+        }
+
+        .navbar {
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            background: linear-gradient(135deg, #6666ff, #4444cc);
+            padding: 1rem;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            color: white;
+            font-size: 1.5rem;
+            font-weight: bold;
+            transition: transform 0.3s ease;
+        }
+
+        .logo:hover {
+            transform: scale(1.1);
+        }
+
+        .nav-links ul {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+        }
+
+        .nav-links a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s ease;
+        }
+
+        .nav-links a:hover {
+            color: #ffa500;
+        }
+
+        .no-content-container {
+            min-height: 80vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 2rem;
+            background: linear-gradient(135deg, #4444cc, #222299);
+            color: white;
+        }
+
+        .no-content-icon {
+            font-size: 4rem;
+            margin-bottom: 1rem;
+            animation: fadeIn 1s ease forwards;
+        }
+
+        .no-content-title {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            animation: fadeIn 1.5s ease forwards;
+        }
+
+        .no-content-text {
+            font-size: 1.2rem;
+            max-width: 600px;
+            line-height: 1.6;
+            animation: fadeIn 2s ease forwards;
+        }
+
+        .cta-button {
+            background: #ffa500;
+            color: white;
+            border: none;
+            padding: 1rem 2rem;
+            border-radius: 25px;
+            font-size: 1.2rem;
+            cursor: pointer;
+            transition: transform 0.3s ease, background 0.3s ease;
+            margin-top: 2rem;
+            animation: fadeIn 2.5s ease forwards;
+        }
+
+        .cta-button:hover {
+            transform: scale(1.1);
+            background: #ffaa00;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        @media (max-width: 768px) {
+            .nav-links ul {
+                gap: 1rem;
+                font-size: 0.9rem;
+            }
+
+            .no-content-title {
+                font-size: 2rem;
+            }
+
+            .no-content-text {
+                font-size: 1rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .navbar {
+                padding: 0.5rem;
+            }
+
+            .no-content-icon {
+                font-size: 3rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="logo">Learn Tani</div>
+            <div class="nav-links">
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="lessons.html">Lessons</a></li>
+                    <li><a href="features.html">Features</a></li>
+                    <li><a href="profile.html">Profile</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <div class="no-content-container">
+        <i class="fas fa-file-alt no-content-icon"></i>
+        <h1 class="no-content-title">No Content Available</h1>
+        <p class="no-content-text">
+            We're sorry, but there's no content available at the moment. 
+            Check back later or explore other sections of the site.
+        </p>
+        <button class="cta-button" onclick="window.location.href='index.html'">
+            Return to Home
+        </button>
+    </div>
+
+    <script>
+        // Add any additional JavaScript functionality here
+        document.addEventListener('DOMContentLoaded', function() {
+            console.log('Page loaded successfully');
+        });
+    </script>
+</body>
+</html>
