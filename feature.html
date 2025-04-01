@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Learn Tani - Features</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Roboto', sans-serif;
+        }
+
+        body {
+            background: #f5f5f5;
+            transition: background 0.3s ease;
+        }
+
+        .navbar {
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            background: linear-gradient(135deg, #6666ff, #4444cc);
+            padding: 1rem;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            color: white;
+            font-size: 1.5rem;
+            font-weight: bold;
+            transition: transform 0.3s ease;
+        }
+
+        .logo:hover {
+            transform: scale(1.1);
+        }
+
+        .nav-links ul {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+        }
+
+        .nav-links a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s ease;
+        }
+
+        .nav-links a:hover {
+            color: #ffa500;
+        }
+
+        .hero {
+            min-height: 60vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: linear-gradient(135deg, #4444cc, #222299);
+            color: white;
+            text-align: center;
+            padding: 2rem;
+        }
+
+        .hero-content h1 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            animation: fadeInDown 1s ease forwards;
+        }
+
+        .hero-content p {
+            font-size: 1.2rem;
+            margin-bottom: 2rem;
+            animation: fadeInUp 1s ease forwards;
+        }
+
+        .features-section {
+            background: white;
+            padding: 5rem 2rem;
+            text-align: center;
+        }
+
+        .feature {
+            background: #f8f8f8;
+            padding: 2rem;
+            border-radius: 15px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            margin: 1rem;
+            cursor: pointer;
+        }
+
+        .feature:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.15);
+        }
+
+        .feature i {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            color: #6666ff;
+        }
+
+        .cta-button {
+            background: #ffa500;
+            color: white;
+            border: none;
+            padding: 1rem 2rem;
+            border-radius: 25px;
+            font-size: 1.2rem;
+            cursor: pointer;
+            transition: transform 0.3s ease, background 0.3s ease;
+            animation: fadeInUp 1s ease forwards;
+            margin-top: 2rem;
+        }
+
+        .cta-button:hover {
+            transform: scale(1.1);
+            background: #ffaa00;
+        }
+
+        @keyframes fadeInDown {
+            from { opacity: 0; transform: translateY(-30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @media (max-width: 768px) {
+            .nav-links ul {
+                gap: 1rem;
+                font-size: 0.9rem;
+            }
+
+            .hero h1 {
+                font-size: 2rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .navbar {
+                padding: 0.5rem;
+            }
+
+            .hero {
+                padding: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="logo">Learn Tani</div>
+            <div class="nav-links">
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="lessons.html">Lessons</a></li>
+                    <li><a href="features.html">Features</a></li>
+                    <li><a href="community.html">Community</a></li>
+                    <li><a href="profile.html">Profile</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <section class="hero">
+        <div class="hero-content">
+            <h1>Explore Our Features</h1>
+            <p>Discover how Learn Tani makes language learning fun and effective</p>
+        </div>
+    </section>
+
+    <section class="features-section">
+        <h2>Key Features</h2>
+        <div class="features-grid">
+            <div class="feature" onclick="location.href='lessons.html';">
+                <i class="fas fa-book-reader"></i>
+                <h3>Interactive Lessons</h3>
+                <p>Structured courses with multimedia content that adapts to your learning pace</p>
+            </div>
+            <div class="feature" onclick="location.href='media.html';">
+                <i class="fas fa-film"></i>
+                <h3>Media Integration</h3>
+                <p>Comics, anime dubs, and Tani media resources to enhance your immersion</p>
+            </div>
+            <div class="feature" onclick="location.href='games.html';">
+                <i class="fas fa-gamepad"></i>
+                <h3>Games & Quizzes</h3>
+                <p>Fun educational activities to reinforce learning through play</p>
+            </div>
+            <div class="feature" onclick="location.href='community.html';">
+                <i class="fas fa-users"></i>
+                <h3>Community Hub</h3>
+                <p>Connect with learners and native speakers for practice and support</p>
+            </div>
+            <div class="feature" onclick="location.href='resource.html';">
+                <i class="fas fa-book-open"></i>
+                <h3>Resource Library</h3>
+                <p>Access downloadable materials, audiobooks, and literature</p>
+            </div>
+        </div>
+        <button class="cta-button" onclick="window.location.href='signup.html'">
+            Get Started
+        </button>
+    </section>
+
+    <script>
+        // Add any additional JavaScript functionality here
+        document.addEventListener('DOMContentLoaded', function() {
+            // Animation for features grid
+            const features = document.querySelectorAll('.feature');
+            features.forEach((feature, index) => {
+                setTimeout(() => {
+                    feature.style.opacity = '1';
+                    feature.style.transform = 'translateY(0)';
+                }, 300 * index);
+            });
+        });
+    </script>
+</body>
+</html>
