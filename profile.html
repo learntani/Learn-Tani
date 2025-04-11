@@ -56,6 +56,18 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
+            width: 100%;
+        }
+
+        .nav-left {
+            display: flex;
+            align-items: center;
+        }
+
+        .logo-img {
+            width: 40px;
+            height: 40px;
+            margin-right: 1rem;
         }
 
         .logo {
@@ -263,6 +275,7 @@
             color: var(--text-primary);
             margin: 0 0.5rem;
             transition: transform 0.3s ease, background 0.3s ease;
+            cursor: pointer;
         }
 
         .social-btn:hover {
@@ -410,6 +423,39 @@
             height: 90px;
         }
 
+        /* Modal */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1001;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            justify-content: center;
+            align-items: center;
+        }
+
+        .modal-content {
+            background-color: white;
+            padding: 2rem;
+            border-radius: 10px;
+            max-width: 500px;
+            width: 90%;
+            text-align: center;
+        }
+
+        .close-btn {
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+            position: absolute;
+            right: 1rem;
+            top: 1rem;
+        }
+
         /* Animations */
         @keyframes fadeIn {
             from { opacity: 0; transform: translateY(20px); }
@@ -490,7 +536,11 @@
 
     <nav class="navbar">
         <div class="nav-container">
-            <div class="logo">Learn Tani</div>
+            <div class="nav-left">
+                <img src="logo.svg" alt="Learn Tani Logo" class="logo-img">
+                <div class="logo">Learn Tani</div>
+            </div>
+            
             <div class="nav-links">
                 <ul>
                     <li><a href="index.html"><i class="fas fa-home"></i> Home</a></li>
@@ -499,6 +549,7 @@
                     <li><a href="profile.html"><i class="fas fa-user"></i> Profile</a></li>
                 </ul>
             </div>
+            
             <div class="hamburger-menu" id="hamburger-menu">
                 <div class="line"></div>
                 <div class="line"></div>
@@ -508,40 +559,6 @@
     </nav>
 
     <div class="container">
-        <!-- Logged-in Section -->
-        <div class="profile-section">
-            <div class="profile-header">
-                <div class="profile-avatar">
-                    <i class="fas fa-user-circle"></i>
-                </div>
-                <div class="profile-info">
-                    <h2 id="userName">John Tani</h2>
-                    <p id="userLevel">New Learner</p>
-                    <div id="userAchievements">
-                        <span class="achievement-badge">First Steps</span>
-                        <span class="achievement-badge">Quiz Master</span>
-                    </div>
-                </div>
-            </div>
-
-            <div class="stats-container">
-                <div class="stat-card">
-                    <h3>Lessons</h3>
-                    <p id="userLessons">12 completed</p>
-                </div>
-                <div class="stat-card">
-                    <h3>Accuracy</h3>
-                    <p id="userAccuracy">85%</p>
-                </div>
-                <div class="stat-card">
-                    <h3>Streak</h3>
-                    <p id="userStreak">5 days</p>
-                </div>
-            </div>
-            
-            <button id="logoutBtn" class="btn" style="margin-top: 2rem;">Logout</button>
-        </div>
-
         <!-- Login Form -->
         <div id="loginForm" class="profile-section">
             <div class="form-title">
@@ -562,9 +579,12 @@
                     <span>OR</span>
                 </div>
                 <div class="social-login">
-                    <button class="social-btn"><i class="fab fa-google"></i></button>
-                    <button class="social-btn"><i class="fab fa-facebook-f"></i></button>
-                    <button class="social-btn"><i class="fab fa-twitter"></i></button>
+                    <button class="social-btn" onclick="showGoogleLogin()">
+                        <i class="fab fa-google"></i>
+                    </button>
+                    <button class="social-btn" onclick="showFacebookLogin()">
+                        <i class="fab fa-facebook-f"></i>
+                    </button>
                 </div>
             </form>
         </div>
@@ -614,9 +634,12 @@
                     <span>OR</span>
                 </div>
                 <div class="social-login">
-                    <button class="social-btn"><i class="fab fa-google"></i></button>
-                    <button class="social-btn"><i class="fab fa-facebook-f"></i></button>
-                    <button class="social-btn"><i class="fab fa-twitter"></i></button>
+                    <button class="social-btn" onclick="showGoogleLogin()">
+                        <i class="fab fa-google"></i>
+                    </button>
+                    <button class="social-btn" onclick="showFacebookLogin()">
+                        <i class="fab fa-facebook-f"></i>
+                    </button>
                 </div>
             </form>
         </div>
@@ -634,6 +657,34 @@
                 <button type="submit" class="btn">Send Reset Link</button>
                 <button type="button" class="btn-link" onclick="showLoginForm()">Back to Login</button>
             </form>
+        </div>
+
+        <!-- Profile Section (Hidden until login/signup) -->
+        <div id="profileSection" class="profile-section" style="display: none;">
+            <div class="profile-header">
+                <div class="profile-avatar">
+                    <i class="fas fa-user-circle"></i>
+                </div>
+                <div class="profile-info">
+                    <h2 id="userName"></h2>
+                    <p id="userLevel"></p>
+                    <div id="userAchievements"></div>
+                </div>
+            </div>
+            
+            <button id="logoutBtn" class="btn" style="margin-top: 2rem;">Logout</button>
+        </div>
+    </div>
+
+    <!-- Social Login Modal -->
+    <div id="socialLoginModal" class="modal">
+        <div class="modal-content">
+            <button class="close-btn" onclick="closeModal()">&times;</button>
+            <h3 id="modalTitle"></h3>
+            <p id="modalMessage"></p>
+            <div style="margin-top: 1rem;">
+                <button class="btn" id="continueBtn">Continue</button>
+            </div>
         </div>
     </div>
 
@@ -655,39 +706,24 @@
             // In a real application, this would send data to a server
             // For demonstration, we'll just show the logged-in section
             
-            // Show logged-in section
-            document.querySelector('.profile-section').innerHTML = `
-                <div class="profile-header">
-                    <div class="profile-avatar">
-                        <i class="fas fa-user-circle"></i>
-                    </div>
-                    <div class="profile-info">
-                        <h2 id="userName">John Tani</h2>
-                        <p id="userLevel">New Learner</p>
-                        <div id="userAchievements">
-                            <span class="achievement-badge">First Steps</span>
-                            <span class="achievement-badge">Quiz Master</span>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="stats-container">
-                    <div class="stat-card">
-                        <h3>Lessons</h3>
-                        <p id="userLessons">12 completed</p>
-                    </div>
-                    <div class="stat-card">
-                        <h3>Accuracy</h3>
-                        <p id="userAccuracy">85%</p>
-                    </div>
-                    <div class="stat-card">
-                        <h3>Streak</h3>
-                        <p id="userStreak">5 days</p>
-                    </div>
-                </div>
-                
-                <button id="logoutBtn" class="btn" style="margin-top: 2rem;">Logout</button>
+            // Get form values
+            const email = this.querySelector('input[placeholder="Email address"]').value;
+            const password = this.querySelector('input[placeholder="Password"]').value;
+            
+            // Simulate successful login
+            const profileSection = document.getElementById('profileSection');
+            profileSection.style.display = 'block';
+            
+            // Set user information
+            document.getElementById('userName').textContent = email.split('@')[0];
+            document.getElementById('userLevel').textContent = 'New Learner';
+            document.getElementById('userAchievements').innerHTML = `
+                <span class="achievement-badge">First Steps</span>
+                <span class="achievement-badge">Quiz Master</span>
             `;
+            
+            // Hide login form
+            document.getElementById('loginForm').style.display = 'none';
             
             // Add event listener to logout button
             document.getElementById('logoutBtn').addEventListener('click', function() {
@@ -720,8 +756,24 @@
             document.getElementById('passwordError').style.display = 'none';
             
             // Simulate successful signup
-            alert('Account created successfully!');
-            showLoginForm();
+            const profileSection = document.getElementById('profileSection');
+            profileSection.style.display = 'block';
+            
+            // Set user information
+            document.getElementById('userName').textContent = fullName;
+            document.getElementById('userLevel').textContent = 'New Learner';
+            document.getElementById('userAchievements').innerHTML = `
+                <span class="achievement-badge">First Steps</span>
+                <span class="achievement-badge">Quiz Master</span>
+            `;
+            
+            // Hide signup form
+            document.getElementById('signupForm').style.display = 'none';
+            
+            // Add event listener to logout button
+            document.getElementById('logoutBtn').addEventListener('click', function() {
+                location.reload();
+            });
         });
 
         // Function to handle logout
@@ -745,6 +797,36 @@
             document.getElementById('loginForm').style.display = 'none';
             document.getElementById('signupForm').style.display = 'none';
             document.getElementById('forgotPasswordForm').style.display = 'block';
+        }
+
+        // Social Login Functions
+        function showGoogleLogin() {
+            showModal('Google Sign-In', 'To sign in with Google, please visit our Google login page and follow the instructions there.');
+            document.getElementById('continueBtn').onclick = function() {
+                // In a real application, this would redirect to Google's OAuth page
+                alert('In a real application, you would be redirected to Google for authentication.');
+                closeModal();
+            };
+        }
+
+        function showFacebookLogin() {
+            showModal('Facebook Sign-In', 'To sign in with Facebook, please visit our Facebook login page and follow the instructions there.');
+            document.getElementById('continueBtn').onclick = function() {
+                // In a real application, this would redirect to Facebook's OAuth page
+                alert('In a real application, you would be redirected to Facebook for authentication.');
+                closeModal();
+            };
+        }
+
+        function showModal(title, message) {
+            const modal = document.getElementById('socialLoginModal');
+            document.getElementById('modalTitle').textContent = title;
+            document.getElementById('modalMessage').textContent = message;
+            modal.style.display = 'flex';
+        }
+
+        function closeModal() {
+            document.getElementById('socialLoginModal').style.display = 'none';
         }
 
         // Password strength validation
