@@ -4,16 +4,24 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Learn Tani - Master Tani Languages</title>
-    <script src="https://unpkg.com/react@18/umd/react.development.js"></script>
-    <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
-    <script src="https://unpkg.com/framer-motion@6.2.8/dist/framer-motion.umd.js"></script>
-    <script src="https://unpkg.com/three@0.132.2/build/three.min.js"></script>
-    <script src="https://unpkg.com/three@0.132.2/examples/js/controls/OrbitControls.js"></script>
-    <script src="https://unpkg.com/three@0.132.2/examples/js/loaders/GLTFLoader.js"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Pacifico&family=Montserrat:wght@400;700&family=Open+Sans:wght@300;400;600&display=swap" rel="stylesheet">
     <style>
-        /* Base Styles and Variables */
+        /* Base Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: linear-gradient(135deg, #f9f7ff, #e3f2fd);
+            color: #2c3e50;
+            line-height: 1.6;
+            font-family: 'Open Sans', sans-serif;
+        }
+
+        /* Vibrant Color Palette */
         :root {
             --primary: #3498db;
             --primary-light: #6bb3f5;
@@ -26,31 +34,6 @@
             --background-light: #ffffff;
             --background-dark: #ecf0f1;
             --shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-            --transition: all 0.3s ease;
-        }
-
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        body {
-            font-family: 'Open Sans', sans-serif;
-            color: var(--text-primary);
-            line-height: 1.6;
-            background: linear-gradient(135deg, #f9f7ff, #e3f2fd);
-            overflow-x: hidden;
-        }
-
-        /* 3D Scene */
-        .three-d-scene {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            z-index: -1;
         }
 
         /* Navbar */
@@ -59,7 +42,7 @@
             top: 0;
             z-index: 1000;
             background: linear-gradient(135deg, var(--primary), var(--primary-light));
-            padding: 1.2rem 2rem;
+            padding: 1rem 2rem;
             box-shadow: var(--shadow);
             display: flex;
             justify-content: space-between;
@@ -73,20 +56,15 @@
         }
 
         .logo-img {
-            width: 45px;
-            height: 45px;
+            width: 50px;
+            height: 50px;
             margin-right: 15px;
             filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.2));
-            transition: var(--transition);
-        }
-
-        .logo-img:hover {
-            transform: scale(1.1);
         }
 
         .logo-text {
             color: var(--background-light);
-            font-size: 1.7rem;
+            font-size: 1.8rem;
             font-weight: 700;
             letter-spacing: 0.5px;
             font-family: 'Pacifico', cursive;
@@ -100,28 +78,22 @@
             width: 30px;
             height: 21px;
             cursor: pointer;
+            padding: 5px;
+            border-radius: 4px;
+            transition: all 0.3s ease;
             align-self: center;
-            z-index: 1001;
         }
 
-        .hamburger-menu span {
+        .hamburger-menu:hover {
+            background-color: rgba(255, 255, 255, 0.1);
+        }
+
+        .hamburger-menu .line {
             width: 100%;
             height: 2px;
             background-color: var(--background-light);
             border-radius: 1px;
-            transition: var(--transition);
-        }
-
-        .hamburger-menu.active span:nth-child(1) {
-            transform: rotate(45deg) translate(5px, 5px);
-        }
-
-        .hamburger-menu.active span:nth-child(2) {
-            opacity: 0;
-        }
-
-        .hamburger-menu.active span:nth-child(3) {
-            transform: rotate(-45deg) translate(5px, -5px);
+            transition: all 0.3s ease;
         }
 
         /* Navigation Menu */
@@ -129,14 +101,14 @@
             position: fixed;
             top: 0;
             right: -300px;
-            width: 280px;
+            width: 300px;
             height: 100vh;
-            background: rgba(255, 255, 255, 0.97);
+            background: rgba(255, 255, 255, 0.95);
             backdrop-filter: blur(10px);
             box-shadow: var(--shadow);
             transition: right 0.3s ease;
             z-index: 999;
-            padding-top: 80px;
+            padding-top: 70px;
         }
 
         .nav-menu.active {
@@ -157,8 +129,8 @@
             font-size: 1.1rem;
             display: flex;
             align-items: center;
-            transition: var(--transition);
-            padding: 10px 0;
+            transition: all 0.3s ease;
+            padding: 8px 0;
             border-radius: 20px;
         }
 
@@ -168,7 +140,7 @@
             padding-left: 15px;
         }
 
-        .nav-links a span {
+        .nav-links a i {
             margin-right: 12px;
             width: 20px;
             text-align: center;
@@ -184,10 +156,21 @@
             background: linear-gradient(135deg, var(--primary), var(--primary-light));
             color: white;
             text-align: center;
-            padding: 4rem 1rem;
+            padding: 3rem 1rem;
             position: relative;
             overflow: hidden;
             border-bottom: 3px solid var(--accent-light);
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="200" height="200" viewBox="0 0 200 200"><g fill="none" stroke-width="2"><path d="M20,20 L180,20 L180,180 L20,180 Z" stroke="rgba(255,255,255,0.05)"/><path d="M40,40 L160,40 L160,160 L40,160 Z" stroke="rgba(255,255,255,0.1)"/><path d="M60,60 L140,60 L140,140 L60,140 Z" stroke="rgba(255,255,255,0.15)"/></g><circle cx="100" cy="100" r="30" fill="none" stroke="rgba(255,255,255,0.2)"/></svg>');
+            background-size: 200px 200px;
         }
 
         .hero-content {
@@ -196,21 +179,23 @@
             max-width: 800px;
         }
 
-        .hero h1 {
+        .hero-content h1 {
             font-size: 3.5rem;
-            margin-bottom: 1.5rem;
+            margin-bottom: 1rem;
             background: linear-gradient(45deg, white, var(--accent));
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             font-weight: 700;
             letter-spacing: -0.5px;
             font-family: 'Montserrat', sans-serif;
+            animation: fadeIn 1.5s ease-in-out;
         }
 
-        .hero p {
+        .hero-content p {
             font-size: 1.3rem;
-            margin-bottom: 2.5rem;
+            margin-bottom: 2rem;
             line-height: 1.8;
+            animation: fadeIn 2s ease-in-out;
         }
 
         .cta-button {
@@ -221,16 +206,15 @@
             border-radius: 30px;
             font-size: 1.1rem;
             cursor: pointer;
-            transition: var(--transition);
+            transition: all 0.3s ease;
             box-shadow: 0 4px 15px rgba(243, 156, 18, 0.4);
             font-family: 'Pacifico', cursive;
-            border: 2px solid transparent;
+            animation: fadeIn 2.5s ease-in-out;
         }
 
         .cta-button:hover {
             transform: translateY(-3px);
             box-shadow: 0 8px 20px rgba(243, 156, 18, 0.6);
-            border-color: var(--accent);
         }
 
         /* Features Section */
@@ -242,9 +226,21 @@
             overflow: hidden;
         }
 
+        .features-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="300" height="300" viewBox="0 0 300 300"><g fill="none" stroke-width="2"><path d="M30,30 L270,30 L270,270 L30,270 Z" stroke="rgba(52,152,219,0.05)"/><path d="M60,60 L240,60 L240,240 L60,240 Z" stroke="rgba(52,152,219,0.1)"/><path d="M90,90 L210,90 L210,210 L90,210 Z" stroke="rgba(52,152,219,0.15)"/></g><circle cx="150" cy="150" r="60" fill="none" stroke="rgba(52,152,219,0.2)"/></svg>');
+            background-size: 300px 300px;
+            opacity: 0.2;
+        }
+
         .features-section h2 {
             font-size: 2.5rem;
-            margin-bottom: 3.5rem;
+            margin-bottom: 3rem;
             color: var(--primary);
             position: relative;
             display: inline-block;
@@ -275,18 +271,11 @@
             padding: 2.5rem;
             border-radius: 12px;
             box-shadow: var(--shadow);
-            transition: var(--transition);
+            transition: all 0.3s ease;
             position: relative;
             overflow: hidden;
             border: 1px solid transparent;
             border-top: 5px solid var(--primary);
-            transform-style: preserve-3d;
-        }
-
-        .feature:hover {
-            transform: translateY(-5px) rotateY(5deg);
-            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
-            border-color: rgba(0, 0, 0, 0.05);
         }
 
         .feature:nth-child(2) {
@@ -297,14 +286,20 @@
             border-top-color: var(--accent);
         }
 
-        .feature-icon {
-            font-size: 2.8rem;
-            margin-bottom: 1.2rem;
-            color: var(--primary);
-            transition: var(--transition);
+        .feature:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+            border-color: rgba(0, 0, 0, 0.05);
         }
 
-        .feature:hover .feature-icon {
+        .feature i {
+            font-size: 2.5rem;
+            margin-bottom: 1.2rem;
+            color: var(--primary);
+            transition: all 0.3s ease;
+        }
+
+        .feature:hover i {
             transform: scale(1.05);
             color: var(--accent);
         }
@@ -330,6 +325,18 @@
             overflow: hidden;
         }
 
+        .mission-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="200" height="200" viewBox="0 0 200 200"><g fill="none" stroke-width="2"><path d="M20,20 L180,20 L180,180 L20,180 Z" stroke="rgba(255,255,255,0.05)"/><path d="M40,40 L160,40 L160,160 L40,160 Z" stroke="rgba(255,255,255,0.1)"/><path d="M60,60 L140,60 L140,140 L60,140 Z" stroke="rgba(255,255,255,0.15)"/></g><circle cx="100" cy="100" r="30" fill="none" stroke="rgba(255,255,255,0.2)"/></svg>');
+            background-size: 200px 200px;
+            opacity: 0.2;
+        }
+
         .mission-content {
             max-width: 800px;
             margin: 0 auto;
@@ -339,13 +346,19 @@
             box-shadow: var(--shadow);
             position: relative;
             border: 2px solid var(--primary-light);
-            transform-style: preserve-3d;
-            transition: var(--transition);
         }
 
-        .mission-content:hover {
-            transform: translateY(-5px) rotateY(2deg);
-            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+        .mission-content h2 {
+            font-size: 2rem;
+            margin-bottom: 1.5rem;
+            color: var(--primary);
+            font-family: 'Montserrat', sans-serif;
+        }
+
+        .mission-content p {
+            font-size: 1.1rem;
+            line-height: 1.8;
+            color: var(--text-secondary);
         }
 
         /* Achievement Popup */
@@ -378,105 +391,55 @@
             animation: pulse 1.5s infinite;
         }
 
+        .achievement-popup p {
+            font-size: 1.2rem;
+            color: var(--text-primary);
+        }
+
         @keyframes pulse {
             0% { transform: scale(1); }
             50% { transform: scale(1.1); }
             100% { transform: scale(1); }
         }
 
-        /* Footer */
-        footer {
-            background: #2c3e50;
-            color: white;
-            padding: 2rem 0;
-            text-align: center;
-            border-top: 3px solid var(--accent);
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
         }
 
-        .footer-content {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 2rem;
+        /* Educational Graphics */
+        .edu-graphic {
+            position: absolute;
+            opacity: 0.1;
+            z-index: 0;
         }
 
-        .footer-top {
-            display: grid;
-            grid-template-columns: 1fr 1fr 1fr;
-            gap: 2rem;
-            margin-bottom: 2rem;
-            text-align: left;
+        .graphic-book {
+            top: 10%;
+            left: 5%;
+            width: 100px;
+            height: 100px;
         }
 
-        .footer-logo {
-            display: flex;
-            flex-direction: column;
-            align-items: flex-start;
+        .graphic-globe {
+            top: 20%;
+            right: 5%;
+            width: 120px;
+            height: 120px;
         }
 
-        .footer-logo .logo-img {
-            width: 40px;
-            height: 40px;
-            margin-bottom: 10px;
+        .graphic-lightbulb {
+            bottom: 15%;
+            left: 10%;
+            width: 80px;
+            height: 80px;
         }
 
-        .footer-logo h3 {
-            margin-bottom: 5px;
-            font-family: 'Pacifico', cursive;
-        }
-
-        .footer-links {
-            display: grid;
-            grid-template-columns: 1fr;
-            gap: 1.5rem;
-        }
-
-        .link-group h4 {
-            margin-bottom: 1rem;
-            color: var(--accent);
-        }
-
-        .link-group ul {
-            list-style: none;
-            padding: 0;
-        }
-
-        .link-group ul li {
-            margin-bottom: 0.5rem;
-        }
-
-        .link-group ul li a {
-            color: rgba(255, 255, 255, 0.8);
-            text-decoration: none;
-            transition: color 0.3s ease;
-        }
-
-        .link-group ul li a:hover {
-            color: white;
-        }
-
-        .footer-social h4 {
-            margin-bottom: 1rem;
-            color: var(--accent);
-        }
-
-        .social-icons {
-            display: flex;
-            gap: 1rem;
-        }
-
-        .social-icons a {
-            color: white;
-            font-size: 1.5rem;
-            transition: color 0.3s ease;
-        }
-
-        .social-icons a:hover {
-            color: var(--accent);
-        }
-
-        .footer-bottom {
-            padding-top: 1.5rem;
-            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        .graphic-pencil {
+            bottom: 20%;
+            right: 10%;
+            width: 90px;
+            height: 90px;
         }
 
         /* Media Queries */
@@ -488,24 +451,15 @@
             .hero h1 {
                 font-size: 2.5rem;
             }
-            
-            .footer-top {
-                grid-template-columns: 1fr;
-                text-align: center;
-            }
-            
-            .footer-logo {
-                align-items: center;
-            }
-            
-            .footer-social {
-                justify-content: center;
-            }
         }
 
         @media (max-width: 480px) {
             .navbar {
                 padding: 0.5rem;
+            }
+
+            .hero {
+                padding: 1rem;
             }
 
             .cta-button {
@@ -517,307 +471,314 @@
                 font-size: 2rem;
             }
         }
+
+        /* Footer */
+footer {
+    background: #2c3e50; /* Dark blue color for better visibility */
+    color: white;
+    padding: 2rem 0;
+    text-align: center;
+    border-top: 3px solid var(--accent);
+}
+
+.footer-content {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 2rem;
+}
+
+.footer-top {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 2rem;
+    margin-bottom: 2rem;
+    text-align: left;
+}
+
+.footer-logo {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+.footer-logo .logo-img {
+    width: 40px;
+    height: 40px;
+    margin-bottom: 10px;
+}
+
+.footer-logo h3 {
+    margin-bottom: 5px;
+    font-family: 'Pacifico', cursive;
+}
+
+.footer-links {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+}
+
+.link-group h4 {
+    margin-bottom: 1rem;
+    color: var(--accent);
+}
+
+.link-group ul {
+    list-style: none;
+    padding: 0;
+}
+
+.link-group ul li {
+    margin-bottom: 0.5rem;
+}
+
+.link-group ul li a {
+    color: rgba(255, 255, 255, 0.8);
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+.link-group ul li a:hover {
+    color: white;
+}
+
+.footer-social h4 {
+    margin-bottom: 1rem;
+    color: var(--accent);
+}
+
+.social-icons {
+    display: flex;
+    gap: 1rem;
+}
+
+.social-icons a {
+    color: white;
+    font-size: 1.5rem;
+    transition: color 0.3s ease;
+}
+
+.social-icons a:hover {
+    color: var(--accent);
+}
+
+.footer-bottom {
+    padding-top: 1.5rem;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+/* Media Queries */
+@media (max-width: 768px) {
+    .footer-top {
+        grid-template-columns: 1fr;
+        text-align: center;
+    }
+    
+    .footer-logo {
+        align-items: center;
+    }
+    
+    .footer-social {
+        justify-content: center;
+    }
+}
     </style>
 </head>
 <body>
-    <div id="root"></div>
+    <!-- Educational Graphics -->
+    <svg class="edu-graphic graphic-book" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+        <path fill="#3498db" d="M21,4H3C2.4,4,2,4.4,2,5v14c0,0.6,0.4,1,1,1h18c0.6,0,1-0.4,1-1V5C22,4.4,21.6,4,21,4z M20,18H4V6h16V18z"/>
+        <path fill="#2980b9" d="M12,13.5c-0.8,0-1.5-0.5-1.8-1.2C10.1,11.4,10,10.6,10,9.5v-1c0-1.1,0.1-2.1,0.4-3C9.5,5.9,10.2,5,11.2,4.3c0.8-0.4,1.8-0.3,2.7,0.2c0.9,0.5,1.7,1.3,2.2,2.3c0.5,1,0.8,2.1,0.9,3.3H12z"/>
+    </svg>
+    
+    <svg class="edu-graphic graphic-globe" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+        <path fill="#2ecc71" d="M12,2C6.48,2,2,6.48,2,12s4.48,10,10,10s10-4.48,10-10S17.52,2,12,2z M12,20c-4.41,0-8-3.59-8-8s3.59-8,8-8s8,3.59,8,8S16.41,20,12,20z"/>
+        <path fill="#27ae60" d="M12,16c-2.21,0-4-1.79-4-4s1.79-4,4-4s4,1.79,4,4S14.21,16,12,16z M12,8c-1.66,0-3,1.34-3,3s1.34,3,3,3s3-1.34,3-3S13.66,8,12,8z"/>
+    </svg>
+    
+    <svg class="edu-graphic graphic-lightbulb" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+        <path fill="#f39c12" d="M9,21c0,0.55,0.45,1,1,1h4c0.55,0,1-0.45,1-1v-1H9V21z M12,3c-4.97,0-9,4.03-9,9v1c0,0.55,0.45,1,1,1h16c0.55,0,1-0.45,1-1v-1C21,7.03,16.97,3,12,3z M12,19c-3.86,0-7-3.14-7-7h14C19,15.86,15.86,19,12,19z"/>
+    </svg>
+    
+    <svg class="edu-graphic graphic-pencil" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+        <path fill="#e74c3c" d="M20.71,7.04C21.1,6.65,21.1,6,20.71,5.63c-0.39-0.39-1.02-0.39-1.41,0L15.41,10.34l-2.29-2.29c-0.39-0.39-1.02-0.39-1.41,0c-0.39,0.39-0.39,1.02,0,1.41L13.93,12l-2.29,2.29c-0.39,0.39-0.39,1.02,0,1.41c0.39,0.39,1.02,0.39,1.41,0l2.29-2.29L17.5,16.71c0.39,0.39,1.02,0.39,1.41,0c0.39-0.39,0.39-1.02,0-1.41l-2.29-2.29l2.29-2.29C21.1,8.02,21.1,7.43,20.71,7.04z"/>
+    </svg>
+
+    <nav class="navbar">
+        <div class="logo-container">
+            <img class="logo-img" src="logo.svg" alt="Learn Tani Logo">
+            <div class="logo-text">Learn Tani</div>
+        </div>
+
+        <!-- Hamburger Menu -->
+        <div class="hamburger-menu" id="hamburger-menu">
+            <div class="line"></div>
+            <div class="line"></div>
+            <div class="line"></div>
+        </div>
+
+        <!-- Navigation Menu -->
+        <div class="nav-menu" id="nav-menu">
+            <div class="nav-links">
+                <a href="index.html">
+                    <i class="fas fa-home"></i> Home
+                </a>
+                <a href="lessons.html">
+                    <i class="fas fa-book"></i> Lessons
+                </a>
+                <a href="features.html">
+                    <i class="fas fa-star"></i> Features
+                </a>
+                <a href="community.html">
+                    <i class="fas fa-users"></i> Community
+                </a>
+                <a href="profile.html">
+                    <i class="fas fa-user"></i> Profile
+                </a>
+            </div>
+        </div>
+    </nav>
+
+    <section class="hero">
+        <div class="hero-content">
+            <h1>Welcome to Learn Tani</h1>
+            <p>Master the Tani languages with immersive learning experiences</p>
+            <button class="cta-button" onclick="window.location.href='learning-page.html'">
+                Start Learning
+            </button>
+        </div>
+    </section>
+
+    <section class="features-section">
+        <h2>Key Features</h2>
+        <div class="features-grid">
+            <div class="feature" onclick="location.href='lessons.html';">
+                <i class="fas fa-book-reader"></i>
+                <h3>Interactive Lessons</h3>
+                <p>Structured courses with multimedia content</p>
+            </div>
+            <div class="feature" onclick="location.href='media-integration.html';">
+                <i class="fas fa-film"></i>
+                <h3>Media Integration</h3>
+                <p>Comics, anime dubs, and Tani media resources</p>
+            </div>
+            <div class="feature" onclick="location.href='quiz-game.html';">
+                <i class="fas fa-gamepad"></i>
+                <h3>Games & Quizzes</h3>
+                <p>Fun educational activities to reinforce learning</p>
+            </div>
+            <div class="feature" onclick="location.href='community.html';">
+                <i class="fas fa-users"></i>
+                <h3>Community Hub</h3>
+                <p>Collaborate with learners and native speakers</p>
+            </div>
+            <div class="feature" onclick="location.href='resource.html';">
+                <i class="fas fa-book-open"></i>
+                <h3>Resource Library</h3>
+                <p>Access downloadable materials, audiobooks, and literature</p>
+            </div>
+            <div class="feature" onclick="location.href='writing-resources.html';">
+                <i class="fas fa-pencil-alt"></i>
+                <h3>Write Articles, Books, Research, Poem, etc..</h3>
+                <p>Resources for creative writing and academic research</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Our Mission Section -->
+    <section class="mission-section">
+        <div class="mission-content">
+            <h2>Our Mission</h2>
+            <p>We believe in Tani Unity and are committed to fostering understanding and connection among Tani-speaking communities worldwide. Through our platform, we support Tani Unity by providing accessible language learning resources that preserve cultural heritage while promoting cross-cultural dialogue. Our efforts focus on creating immersive educational experiences that empower learners to connect with Tani cultures and contribute to a unified Tani-speaking community.</p>
+        </div>
+    </section>
+
+    <div class="achievement-popup">
+        <i class="fas fa-trophy fa-2x"></i>
+        <p>Congratulations! You unlocked the 'First Steps' achievement!</p>
+    </div>
+
+   <footer>
+    <div class="footer-content">
+        <div class="footer-top">
+            <div class="footer-logo">
+                <img class="logo-img" src="logo.svg" alt="Learn Tani Logo">
+                <h3>Learn Tani</h3>
+                <p>Empowering language learners worldwide</p>
+            </div>
+            <div class="footer-links">
+                <div class="link-group">
+                    <h4>Legal</h4>
+                    <ul>
+                        <li><a href="privacy-policy.html" target="_blank">Privacy Policy</a></li>
+                        <li><a href="terms.html">Terms of Service</a></li>
+                        <li><a href="cookies.html">Cookie Policy</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-social">
+                <h4>Connect With Us</h4>
+                <div class="social-icons">
+                    <a href="#" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+                    <a href="https://www.instagram.com/learntani" aria-label="Instagram" target="_blank"><i class="fab fa-instagram"></i></a>
+                    <a href="https://www.youtube.com/@learntani" aria-label="YouTube" target="_blank"><i class="fab fa-youtube"></i></a>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>© 2025 Learn Tani. All rights reserved.</p>
+        </div>
+    </div>
+</footer>
 
     <script>
-        // Header Component
-        const Header = () => {
-            const [menuOpen, setMenuOpen] = React.useState(false);
-            
-            return (
-                <nav className="navbar">
-                    <div className="logo-container">
-                        <img className="logo-img" src="/logo.svg" alt="Learn Tani Logo" />
-                        <div className="logo-text">Learn Tani</div>
-                    </div>
-                    
-                    <button 
-                        className={`hamburger-menu ${menuOpen ? 'active' : ''}`}
-                        onClick={() => setMenuOpen(!menuOpen)}
-                    >
-                        <span></span>
-                        <span></span>
-                        <span></span>
-                    </button>
-                    
-                    <div className={`nav-menu ${menuOpen ? 'active' : ''}`}>
-                        <div className="nav-links">
-                            <a href="index.html">
-                                <i className="fas fa-home"></i> Home
-                            </a>
-                            <a href="lessons.html">
-                                <i className="fas fa-book"></i> Lessons
-                            </a>
-                            <a href="features.html">
-                                <i className="fas fa-star"></i> Features
-                            </a>
-                            <a href="community.html">
-                                <i className="fas fa-users"></i> Community
-                            </a>
-                            <a href="profile.html">
-                                <i className="fas fa-user"></i> Profile
-                            </a>
-                        </div>
-                    </div>
-                </nav>
-            );
-        };
+        // Hamburger Menu Toggle
+        const hamburgerMenu = document.getElementById('hamburger-menu');
+        const navMenu = document.getElementById('nav-menu');
 
-        // Hero Section Component
-        const HeroSection = () => {
-            return (
-                <section className="hero">
-                    <div 
-                        className="hero-content"
-                        style={{ animation: 'fadeIn 1s ease-out' }}
-                    >
-                        <h1>Welcome to Learn Tani</h1>
-                        <p>Master the Tani languages with immersive 3D learning experiences</p>
-                        <button 
-                            className="cta-button" 
-                            onClick={() => window.location.href='learning-page.html'}
-                            style={{ animation: 'pulse 2s infinite' }}
-                        >
-                            Start Learning
-                        </button>
-                    </div>
-                </section>
-            );
-        };
+        hamburgerMenu.addEventListener('click', () => {
+            navMenu.classList.toggle('active');
+        });
 
-        // Features Section Component
-        const FeaturesSection = () => {
-            return (
-                <section className="features-section">
-                    <h2>Key Features</h2>
-                    
-                    <div className="features-grid">
-                        <div 
-                            className="feature" 
-                            style={{ animationDelay: '0.2s' }}
-                            onClick={() => window.location.href='lessons.html'}
-                        >
-                            <i className="fas fa-book-reader feature-icon"></i>
-                            <h3>Interactive Lessons</h3>
-                            <p>Structured courses with multimedia content</p>
-                        </div>
-                        
-                        <div 
-                            className="feature" 
-                            style={{ animationDelay: '0.4s' }}
-                            onClick={() => window.location.href='media-integration.html'}
-                        >
-                            <i className="fas fa-film feature-icon"></i>
-                            <h3>Media Integration</h3>
-                            <p>Comics, anime dubs, and Tani media resources</p>
-                        </div>
-                        
-                        <div 
-                            className="feature" 
-                            style={{ animationDelay: '0.6s' }}
-                            onClick={() => window.location.href='quiz-game.html'}
-                        >
-                            <i className="fas fa-gamepad feature-icon"></i>
-                            <h3>Games & Quizzes</h3>
-                            <p>Fun educational activities to reinforce learning</p>
-                        </div>
-                        
-                        <div 
-                            className="feature" 
-                            style={{ animationDelay: '0.8s' }}
-                            onClick={() => window.location.href='community.html'}
-                        >
-                            <i className="fas fa-users feature-icon"></i>
-                            <h3>Community Hub</h3>
-                            <p>Collaborate with learners and native speakers</p>
-                        </div>
-                        
-                        <div 
-                            className="feature" 
-                            style={{ animationDelay: '1s' }}
-                            onClick={() => window.location.href='resource.html'}
-                        >
-                            <i className="fas fa-book-open feature-icon"></i>
-                            <h3>Resource Library</h3>
-                            <p>Access downloadable materials, audiobooks, and literature</p>
-                        </div>
-                        
-                        <div 
-                            className="feature" 
-                            style={{ animationDelay: '1.2s' }}
-                            onClick={() => window.location.href='writing-resources.html'}
-                        >
-                            <i className="fas fa-pencil-alt feature-icon"></i>
-                            <h3>Write Articles, Books, Research, Poem, etc..</h3>
-                            <p>Resources for creative writing and academic research</p>
-                        </div>
-                    </div>
-                </section>
-            );
-        };
+        // Close menu when clicking outside
+        document.addEventListener('click', (event) => {
+            if (!navMenu.contains(event.target) && !hamburgerMenu.contains(event.target)) {
+                navMenu.classList.remove('active');
+            }
+        });
 
-        // ThreeD Scene Component
-        const ThreeDScene = ({ isMobile }) => {
-            const mount = React.useRef(null);
-            
-            React.useEffect(() => {
-                // Scene setup
-                const scene = new THREE.Scene();
-                const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
-                const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
-                
-                renderer.setSize(window.innerWidth, window.innerHeight);
-                renderer.setPixelRatio(window.devicePixelRatio);
-                renderer.shadowMap.enabled = true;
-                
-                mount.current.appendChild(renderer.domElement);
-                
-                // Camera position
-                camera.position.set(0, 5, 10);
-                
-                // Controls
-                const controls = new THREE.OrbitControls(camera, renderer.domElement);
-                controls.enableDamping = true;
-                controls.dampingFactor = 0.05;
-                
-                // Lights
-                const ambientLight = new THREE.AmbientLight(0xffffff, 0.5);
-                scene.add(ambientLight);
-                
-                const directionalLight = new THREE.DirectionalLight(0xffffff, 0.8);
-                directionalLight.position.set(5, 10, 7);
-                directionalLight.castShadow = true;
-                scene.add(directionalLight);
-                
-                // Create a simple 3D model (cube with book texture)
-                const geometry = new THREE.BoxGeometry(4, 3, 2);
-                const material = new THREE.MeshStandardMaterial({ 
-                    color: 0x3498db,
-                    roughness: 0.7,
-                    metalness: 0.2
+        // Achievement Popup
+        let score = 0;
+        const achievementPopup = document.querySelector('.achievement-popup');
+
+        function startGame() {
+            window.location.href = 'learning-page.html';
+        }
+
+        function checkAnswer(isCorrect) {
+            const options = document.querySelectorAll('.option-btn');
+            if (isCorrect) {
+                options.forEach(opt => opt.classList.toggle('correct', isCorrect));
+                score += 100;
+                showAchievement();
+            } else {
+                options.forEach(opt => opt.classList.toggle('incorrect', !isCorrect));
+            }
+
+            setTimeout(() => {
+                options.forEach(opt => {
+                    opt.classList.remove('correct');
+                    opt.classList.remove('incorrect');
                 });
-                const bookModel = new THREE.Mesh(geometry, material);
-                bookModel.castShadow = true;
-                bookModel.receiveShadow = true;
-                scene.add(bookModel);
-                
-                // Add a plane (ground)
-                const planeGeometry = new THREE.PlaneGeometry(20, 20);
-                const planeMaterial = new THREE.MeshStandardMaterial({ 
-                    color: 0xf3f3f3,
-                    roughness: 0.9
-                });
-                const plane = new THREE.Mesh(planeGeometry, planeMaterial);
-                plane.rotation.x = -Math.PI / 2;
-                plane.position.y = -1.5;
-                plane.receiveShadow = true;
-                scene.add(plane);
-                
-                // Animation loop
-                const animate = () => {
-                    requestAnimationFrame(animate);
-                    bookModel.rotation.y += 0.005;
-                    controls.update();
-                    renderer.render(scene, camera);
-                };
-                
-                animate();
-                
-                // Handle window resize
-                const handleResize = () => {
-                    camera.aspect = window.innerWidth / window.innerHeight;
-                    camera.updateProjectionMatrix();
-                    renderer.setSize(window.innerWidth, window.innerHeight);
-                };
-                
-                window.addEventListener('resize', handleResize);
-                
-                // Cleanup
-                return () => {
-                    window.removeEventListener('resize', handleResize);
-                    mount.current.removeChild(renderer.domElement);
-                };
-                
-            }, [isMobile]);
-            
-            return <div ref={mount} className="three-d-scene"></div>;
-        };
+            }, 1500);
+        }
 
-        // Footer Component
-        const Footer = () => {
-            return (
-                <footer>
-                    <div className="footer-content">
-                        <div className="footer-top">
-                            <div className="footer-logo">
-                                <img className="logo-img" src="/logo.svg" alt="Learn Tani Logo" />
-                                <h3>Learn Tani</h3>
-                                <p>Empowering language learners worldwide</p>
-                            </div>
-                            <div className="footer-links">
-                                <div className="link-group">
-                                    <h4>Legal</h4>
-                                    <ul>
-                                        <li><a href="privacy-policy.html" target="_blank">Privacy Policy</a></li>
-                                        <li><a href="terms.html">Terms of Service</a></li>
-                                        <li><a href="cookies.html">Cookie Policy</a></li>
-                                    </ul>
-                                </div>
-                            </div>
-                            <div className="footer-social">
-                                <h4>Connect With Us</h4>
-                                <div className="social-icons">
-                                    <a href="https://www.facebook.com/learntani" aria-label="Facebook" target="_blank">
-                                        <i className="fab fa-facebook-f"></i>
-                                    </a>
-                                    <a href="https://www.instagram.com/learntani" aria-label="Instagram" target="_blank">
-                                        <i className="fab fa-instagram"></i>
-                                    </a>
-                                    <a href="https://www.youtube.com/@learntani" aria-label="YouTube" target="_blank">
-                                        <i className="fab fa-youtube"></i>
-                                    </a>
-                                </div>
-                            </div>
-                        </div>
-                        <div className="footer-bottom">
-                            <p>© 2025 Learn Tani. All rights reserved.</p>
-                        </div>
-                    </div>
-                </footer>
-            );
-        };
-
-        // Main App Component
-        const App = () => {
-            const [isMobile, setIsMobile] = React.useState(window.innerWidth < 768);
-            
-            React.useEffect(() => {
-                const handleResize = () => {
-                    setIsMobile(window.innerWidth < 768);
-                };
-                
-                window.addEventListener('resize', handleResize);
-                return () => window.removeEventListener('resize', handleResize);
-            }, []);
-
-            return (
-                <div className="app">
-                    <ThreeDScene isMobile={isMobile} />
-                    <Header />
-                    <main>
-                        <HeroSection />
-                        <FeaturesSection />
-                    </main>
-                    <Footer />
-                </div>
-            );
-        };
-
-        // Render the App
-        ReactDOM.render(<App />, document.getElementById('root'));
+        function showAchievement() {
+            achievementPopup.classList.add('active');
+            setTimeout(() => {
+                achievementPopup.classList.remove('active');
+            }, 3000);
+        }
     </script>
 </body>
-</html>
+    </html>
